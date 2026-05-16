@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BNOC - The Ultimate University Card Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="sticky-header">
+        <button class="burger-menu" aria-label="Open Navigation Menu" onclick="toggleBurgerMenu()">
+            <span class="burger-bar"></span>
+            <span class="burger-bar"></span>
+            <span class="burger-bar"></span>
+        </button>
+        <h1 class="logo">BNOC</h1>
+        <div style="width: 44px;"></div> </header>
+
+    <main class="container">
+        
+        <section class="hero-section">
+            <p class="hero-text">It’s your first day at university, make sure you are sat in the best seat in class to become the Big Name On Campus!</p>
+        </section>
+
+        <nav class="jump-links-container">
+            <button class="jump-link-btn" data-target="aim-section">Aim of the Game</button>
+            <button class="jump-link-btn" data-target="how-to-play-section">How To Play</button>
+            <button class="jump-link-btn" data-target="characters-section">Character Cards</button>
+            <button class="jump-link-btn" data-target="action-cards-section">Action Cards</button>
+        </nav>
+
+        <section class="accordion-item" id="aim-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>Aim of the Game</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding">
+                    <p>Get your player to be positioned in the best spot come the time the lecture room is full. Your score is based on the number of points of those who you are sat within touching distance of. The player with the highest score wins.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="accordion-item" id="how-to-play-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>How to Play</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding nested-accordion-container">
+                    
+                    <div class="nested-item">
+                        <button class="nested-trigger">Set Up</button>
+                        <div class="nested-content"><p>Shuffle the deck, hand each player 5 starting cards, and place the main Lecture Hall grid template in the center of the table.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">Types Of Card</button>
+                        <div class="nested-content"><p>There are two primary card pools: Character Cards (who you sit next to) and Action Cards (how you manipulate the room seating arrangements).</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">What To Do On Each Go</button>
+                        <div class="nested-content"><p>Draw one card from the pile, play one Action Card from your hand, or choose to position a character token onto an empty seat grid square.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">When To Place The Player</button>
+                        <div class="nested-content"><p>Your primary BNOC token must be hidden until mid-game, or deployed strategically when your favorite archetype cards surround an open hot-seat.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">How Does The Scoring Work</button>
+                        <div class="nested-content"><p>Calculate the combined social status integers of all touching adjacent squares (horizontal, vertical, and diagonal) directly surrounding your marker.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">How Does The Game End</button>
+                        <div class="nested-content"><p>The game reaches its immediate conclusion when the final row seat configuration is occupied or the lecturer walks through the door card!</p></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="accordion-item" id="characters-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>Character Cards</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding nested-accordion-container">
+                    
+                    <div class="nested-item">
+                        <button class="nested-trigger">Party Animals</button>
+                        <div class="nested-content"><p>High risk, high social multiplier points. They boost surrounding spaces but completely ruin focus scores if adjacent to the front row.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">Nerds</button>
+                        <div class="nested-content"><p>Quiet but highly reliable. Sitting within proximity gives you automatic pass marks, converting academic bonuses straight into raw end-game victory conditions.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">Sport Stars</button>
+                        <div class="nested-content"><p>Command massive popularity values. Everyone wants to sit by them, drawing away attention from competitors but taking up two grid spaces dynamically.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">The Beast</button>
+                        <div class="nested-content"><p>An absolute untamed campus wild-card. Flips adjacent card mechanics upside down randomly every odd-numbered turn phase.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">The Creep</button>
+                        <div class="nested-content"><p>Siphons away valuable score nodes silently from anyone unlucky enough to be seated within direct touching distance radius.</p></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="accordion-item" id="action-cards-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>Action Cards</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding">
+                    <div class="carousel-wrapper">
+                        
+                        <div class="carousel-card-thumb" data-title="The All Nighter" data-desc="Force an adjacent opponent to discard two character cards from their active hand due to extreme fatigue.">
+                            <div class="card-thumb-mock red-gradient">
+                                <span>The All Nighter</span>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb" data-title="Seat Stealer" data-desc="Swap any character card currently resting on the grid with another character from your immediate deck pile.">
+                            <div class="card-thumb-mock blue-gradient">
+                                <span>Seat Stealer</span>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb" data-title="Rumor Mill" data-desc="Completely scramble all character placement positions across an entire row layout block.">
+                            <div class="card-thumb-mock purple-gradient">
+                                <span>Rumor Mill</span>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb" data-title="Teacher's Pet" data-desc="Gain instant immune protection status against surrounding negative archetype point reductions.">
+                            <div class="card-thumb-mock green-gradient">
+                                <span>Teacher's Pet</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="carousel-hint">← Swipe to view cards • Tap to inspect details →</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="accordion-item" id="faq-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>FAQs</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding nested-accordion-container">
+                    
+                    <div class="nested-item">
+                        <button class="nested-trigger">Was Castro Bumbani born gay or did he discover it?</button>
+                        <div class="nested-content"><p>It is a mystery of the Mexican ways.</p></div>
+                    </div>
+                    <div class="nested-item">
+                        <button class="nested-trigger">Was Scotty always 2 Hotty?</button>
+                        <div class="nested-content"><p>When he was younger he was 1 Hotty, but then he hit the gym and became 2 Hotty.</p></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="modal-overlay" id="cardModal">
+        <div class="modal-3d-container">
+            <div class="modal-card-flip-object" id="modalFlipObject">
+                
+                <div class="modal-face card-front" id="modalCardFront">
+                    <div class="card-inner-design">
+                        <h2 id="modalFrontTitle">Card Title</h2>
+                        <div class="card-graphics-placeholder">★</div>
+                    </div>
+                </div>
+
+                <div class="modal-face card-back" id="modalCardBack">
+                    <button class="modal-close-btn" id="closeModalBtn" aria-label="Close details">✕</button>
+                    <div class="card-inner-design">
+                        <span class="card-back-badge">ACTION ABILITY</span>
+                        <h3 id="modalBackTitle">Card Title</h3>
+                        <p id="modalBackDescription">Card rules/holder explanations display here smoothly.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
