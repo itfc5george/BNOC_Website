@@ -1,0 +1,18 @@
+{
+  "expelled": {
+    "title": "Expelled",
+    "description": "Remove a character card from the grid"
+  },
+  "fall_asleep": {
+    "title": "Fall Asleep",
+    "description": "Turn over a character card"
+  },
+  "tactical_chunder": {
+    "title": "Tactical Chunder",
+    "description": "Move a row to get a player to the end of the row"
+  },
+  "how_about_no": {
+    "title": "How About No?",
+    "description": "Tell the other person to fuck off! Their action against you does not count."
+  }
+}

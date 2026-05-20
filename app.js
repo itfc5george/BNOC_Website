@@ -158,3 +158,46 @@ function initActionCardModal() {
 function toggleBurgerMenu() {
     alert("BNOC Menu Features: Settings, Deck Builder, and Online Lobby links are unlocked in full deployment builds!");
 }
+
+/**
+ * 5. DYNAMIC SITE TEXT POPULATOR FROM JSON FILE
+ */
+async function populateSiteText() {
+    try {
+        // 1. Fetch the JSON file
+        const response = await fetch('action_cards.json');
+        if (!response.ok) throw new Error("Could not fetch action_cards.json");
+        const data = await response.json();
+        
+        // 2. Select all card elements that have a data-section attribute
+        const cards = document.querySelectorAll('.carousel-card-thumb[data-section]');
+        
+        // 3. Loop through each card and update its attributes + text elements
+        cards.forEach(card => {
+            const section = card.getAttribute('data-section'); // e.g., "expelled"
+            
+            // Check if this section exists in your JSON
+            if (data[section]) {
+                const cardData = data[section];
+                
+                // Update the HTML data attributes dynamically
+                card.setAttribute('data-title', cardData.title);
+                card.setAttribute('data-desc', cardData.description);
+                
+                // Update the visible text inside the span element
+                const titleSpan = card.querySelector('span');
+                if (titleSpan) {
+                    titleSpan.textContent = cardData.title;
+                }
+            } else {
+                console.warn(`Missing data in JSON for section: ${section}`);
+            }
+        });
+        
+    } catch (error) {
+        console.error("Error loading text content:", error);
+    }
+}
+
+// Run the function as soon as the DOM is ready
+document.addEventListener("DOMContentLoaded", populateSiteText);
