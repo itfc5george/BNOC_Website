@@ -11,6 +11,7 @@
 </head>
 <body>
 
+    <!-- STICKY HEADER WITH LOGO AND BURGER MENU -->
     <header class="sticky-header">
         <button class="burger-menu" aria-label="Open Navigation Menu" onclick="toggleBurgerMenu()">
             <span class="burger-bar"></span>
@@ -22,10 +23,12 @@
 
     <main class="container">
         
+        <!-- HERO SECTION -->
         <section class="hero-section">
             <p class="hero-text">It’s your first day at university, make sure you are sat in the best seat in class to become the Big Name On Campus!</p>
         </section>
 
+        <!-- JUMP LINKS SECTION -->
         <nav class="jump-links-container">
             <button class="jump-link-btn" data-target="aim-section">Aim of the Game</button>
             <button class="jump-link-btn" data-target="how-to-play-section">How To Play</button>
@@ -33,6 +36,7 @@
             <button class="jump-link-btn" data-target="action-cards-section">Action Cards</button>
         </nav>
 
+        <!-- AIM OF THE GAME SECTION -->
         <section class="accordion-item" id="aim-section">
             <button class="accordion-trigger" aria-expanded="false">
                 <span>Aim of the Game</span>
@@ -45,6 +49,7 @@
             </div>
         </section>
 
+        <!-- HOW TO PLAY SECTION -->
         <section class="accordion-item" id="how-to-play-section">
             <button class="accordion-trigger" aria-expanded="false">
                 <span>How to Play</span>
@@ -82,6 +87,7 @@
             </div>
         </section>
 
+        <!-- CHARCATER CARDS SECTION -->
         <section class="accordion-item" id="characters-section">
             <button class="accordion-trigger" aria-expanded="false">
                 <span>Character Cards</span>
@@ -115,6 +121,7 @@
             </div>
         </section>
 
+        <!-- ACTION CARDS SECTION -->
         <section class="accordion-item" id="action-cards-section">
             <button class="accordion-trigger" aria-expanded="false">
                 <span>Action Cards</span>
@@ -154,6 +161,7 @@
             </div>
         </section>
 
+        <!-- FAQ SECTION -->
         <section class="accordion-item" id="faq-section">
             <button class="accordion-trigger" aria-expanded="false">
                 <span>FAQs</span>
@@ -175,8 +183,171 @@
             </div>
         </section>
 
+        <!-- QUIZ SECTION -->
+        <section class="accordion-item" id="action-cards-section">
+            <button class="accordion-trigger" aria-expanded="false">
+                <span>Quiz : Which Character Are You?</span>
+                <span class="icon-chevron"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="content-padding">
+                    <div class="carousel-wrapper" id = "quizCarousel">
+
+                        <div class="carousel-card-thumb quiz-card" question-category="food">
+                            <div class="card-inner-layout purple-gradient">
+                                <div class="quiz-card-header">
+                                    <span class="badge">QUESTION 1/5</span>
+                                    <span class="card-question">CARD QUESTION</span>                                        
+                                </div>
+                                <div class="quiz-options-grid">
+                                    <button class="quiz-option-btn" data-value="A"></button>
+                                    <button class="quiz-option-btn" data-value="B"></button>
+                                    <button class="quiz-option-btn" data-value="C"></button>
+                                    <button class="quiz-option-btn" data-value="D"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb quiz-card" question-category="bag">
+                            <div class="card-inner-layout blue-gradient">
+                                <div class="quiz-card-header">
+                                    <span class="badge">QUESTION 2/5</span>
+                                    <span class="card-question">CARD QUESTION</span>                                        
+                                </div>
+                                <div class="quiz-options-grid">
+                                    <button class="quiz-option-btn" data-value="A"></button>
+                                    <button class="quiz-option-btn" data-value="B"></button>
+                                    <button class="quiz-option-btn" data-value="C"></button>
+                                    <button class="quiz-option-btn" data-value="D"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb quiz-card" question-category="instrument">
+                            <div class="card-inner-layout green-gradient">
+                                <div class="quiz-card-header">
+                                    <span class="badge">QUESTION 3/5</span>
+                                    <span class="card-question">CARD QUESTION</span>                                        
+                                </div>
+                                <div class="quiz-options-grid">
+                                    <button class="quiz-option-btn" data-value="A"></button>
+                                    <button class="quiz-option-btn" data-value="B"></button>
+                                    <button class="quiz-option-btn" data-value="C"></button>
+                                    <button class="quiz-option-btn" data-value="D"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card-thumb quiz-card" question-category="night_out">
+                            <div class="card-inner-layout red-gradient">
+                                <div class="quiz-card-header">
+                                    <span class="badge">QUESTION 4/10</span>
+                                    <span class="card-question">CARD QUESTION</span>                                        
+                                </div>
+                                <div class="quiz-options-grid">
+                                    <button class="quiz-option-btn" data-value="A"></button>
+                                    <button class="quiz-option-btn" data-value="B"></button>
+                                    <button class="quiz-option-btn" data-value="C"></button>
+                                    <button class="quiz-option-btn" data-value="D"></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+<!-- 
+                                <div class="carousel-card-thumb quiz-card" data-question="1">
+                                    <div class="card-inner-layout blue-gradient">
+                                        <div class="quiz-card-header">
+                                            <span class="badge">QUESTION 2/5</span>
+                                            <h2>What does CSS stand for?</h2>
+                                        </div>
+                                        <div class="quiz-options-grid">
+                                            <button class="quiz-option-btn" data-value="A">A) Creative Style Sheets</button>
+                                            <button class="quiz-option-btn" data-value="B">B) Computer Style Sheets</button>
+                                            <button class="quiz-option-btn" data-value="C">C) Cascading Style Sheets</button>
+                                            <button class="quiz-option-btn" data-value="D">D) Colorful Style Sheets</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-card-thumb quiz-card" data-question="2">
+                                    <div class="card-inner-layout green-gradient">
+                                        <div class="quiz-card-header">
+                                            <span class="badge">QUESTION 3/5</span>
+                                            <h2>Which keyword is used to declare a block-scoped variable in JavaScript?</h2>
+                                        </div>
+                                        <div class="quiz-options-grid">
+                                            <button class="quiz-option-btn" data-value="A">A) var</button>
+                                            <button class="quiz-option-btn" data-value="B">B) let</button>
+                                            <button class="quiz-option-btn" data-value="C">C) define</button>
+                                            <button class="quiz-option-btn" data-value="D">D) string</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-card-thumb quiz-card" data-question="3">
+                                    <div class="card-inner-layout red-gradient">
+                                        <div class="quiz-card-header">
+                                            <span class="badge">QUESTION 4/5</span>
+                                            <h2>Which CSS property specifies the stack order of an element?</h2>
+                                        </div>
+                                        <div class="quiz-options-grid">
+                                            <button class="quiz-option-btn" data-value="A">A) z-index</button>
+                                            <button class="quiz-option-btn" data-value="B">B) order</button>
+                                            <button class="quiz-option-btn" data-value="C">C) x-index</button>
+                                            <button class="quiz-option-btn" data-value="D">D) position</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-card-thumb quiz-card" data-question="4">
+                                    <div class="card-inner-layout purple-gradient">
+                                        <div class="quiz-card-header">
+                                            <span class="badge">QUESTION 5/5</span>
+                                            <h2>What is the correct way to write a JavaScript array?</h2>
+                                        </div>
+                                        <div class="quiz-options-grid">
+                                            <button class="quiz-option-btn" data-value="A">A) const colors = ["red", "green"]</button>
+                                            <button class="quiz-option-btn" data-value="B">B) const colors = (1:"red", 2:"green")</button>
+                                            <button class="quiz-option-btn" data-value="C) const colors = "red", "green"</button>
+                                            <button class="quiz-option-btn" data-value="D">D) const colors = {"red", "green"}</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-card-thumb quiz-card result-card" id="finalCard">
+                                    <div class="card-inner-layout result-gradient">
+                                        <div class="result-display-area" id="resultDisplay">
+                                            <span class="badge">DECK COMPLETED</span>
+                                            <h2>All questions answered! Ready to calculate your score?</h2>
+                                        </div>
+                                        <button class="reveal-btn" id="revealBtn">Reveal Result</button>
+                                    </div>
+                                </div> -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="carousel-hint">Swipe sideways or pick answers to shift deck cards</div>
     </main>
 
+    </main>
+
+    
+
+
+
+    <!-- DIV TO CREATE THE DYNAMIC LOOK FOR THE ACTION CARDS -->
     <div class="modal-overlay" id="cardModal">
         <div class="modal-3d-container">
             <div class="modal-card-flip-object" id="modalFlipObject">

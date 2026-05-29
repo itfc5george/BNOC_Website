@@ -1,0 +1,33 @@
+{
+  "food": {
+    "question": "Which of these would you most want to eat?",
+    "A_Answer": {"answer":"A bowl of cereal", "player":"Doss The Dosser"},
+    "B_Answer": {"answer":"A protein shake", "player":"Left Hook Louis"},
+    "C_Answer": {"answer":"A Yorkshire pudding", "player":"Northern Nina"},
+    "D_Answer": {"answer":"Last night's left over kebab", "player":"Beast!"}
+  },
+
+  "bag": {
+    "question": "Which of these items would most likely be found in your bag?",
+    "A_Answer": {"answer":"Sticky Plasters", "player":"GP Georgie"},
+    "B_Answer": {"answer":"Your passport", "player":"Cadette Chris"},
+    "C_Answer": {"answer":"A deck of cards", "player":"Gamemaster Rob"},
+    "D_Answer": {"answer":"Lipstick", "player":"Cosmetics Crisby"}
+  },
+
+  "instrument": {
+    "question": "Which of these instruments would you most want to play?",
+    "A_Answer": {"answer":"Maraccas", "player":"Castro Bumbani"},
+    "B_Answer": {"answer":"Bass guitar", "player":"Scotty2Hotty"},
+    "C_Answer": {"answer":"Acordion", "player":"Cultured Ciara"},
+    "D_Answer": {"answer":"Theramin", "player":"Carpool Calum"}
+  },
+
+  "night_out": {
+    "question": "What are you most likely to get up to on a night out in the club?",
+    "A_Answer": {"answer":"Get with someone you shouldn't", "player":"Bar-crawl Beth"},
+    "B_Answer": {"answer":"Perform a choreographed dance", "player":"Ballroom Bella"},
+    "C_Answer": {"answer":"Stand playing chess on your phone", "player":"Greasy Hair Kid"},
+    "D_Answer": {"answer":"Slutdrop on the dance pole", "player":"Shindig Sophie"}
+  }
+}
