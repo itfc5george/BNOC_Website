@@ -276,6 +276,7 @@ body {
 
 .carousel-card-thumb {
     flex: 0 0 75%; /* Viewport visibility width baseline for adjacent cards hint */
+    width: 75%;
     scroll-snap-align: center;
     aspect-ratio: 2.5 / 3.5; /* Traditional physical gaming card dimensional scaling */
     cursor: pointer;
