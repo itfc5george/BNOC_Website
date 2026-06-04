@@ -312,6 +312,17 @@ async function populateQuizQuestions() {
                 const questionH2 = card.querySelector('.card-question');
                 if (questionH2) questionH2.textContent = cardData.question;
 
+                // 1. Set the starting default font size
+                let currentTitleSize = 2.0; // This represents 0.85rem
+                questionH2.style.fontSize = `${currentTitleSize}rem`;
+                
+                // 2. The Auto-Fit Engine: 
+                // If the text width (scrollHeight) is wider than the card width (clientHeight)...
+                while (questionH2.scrollHeight > questionH2.clientHeight && currentTitleSize > 0.55) {
+                    currentTitleSize -= 0.05; // Drop the font size by a tiny amount
+                    questionH2.style.fontSize = `${currentTitleSize}rem`; //Applies the smaller size font
+                }
+
                 // 2. Loop through each option letter
                 ['A', 'B', 'C', 'D'].forEach(letter => {
                     // Finds the button where class is 'quiz-option-btn' AND data-value matches the current letter
@@ -329,9 +340,10 @@ async function populateQuizQuestions() {
                         button.style.fontSize = `${currentSize}rem`;
                         
                         // 3. The Auto-Fit Engine: 
-                        // If the text width (scrollWidth) is wider than the button width (clientWidth)...
-                        while (button.scrollWidth > button.clientWidth && currentSize > 0.55) {
+                        // If the text width (scrollHeight) is wider than the button width (clientWidth)...
+                        while (button.scrollHeight > button.clientHeight && currentSize > 0.55) {
                             currentSize -= 0.05; // Drop the font size by a tiny amount
+                            button.style.fontSize = `${currentSize}rem`;
                         }
 
                     }

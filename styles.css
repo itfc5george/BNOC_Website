@@ -277,6 +277,7 @@ body {
 .carousel-card-thumb {
     flex: 0 0 75%; /* Viewport visibility width baseline for adjacent cards hint */
     width: 75%;
+    box-sizing: border-box;
     scroll-snap-align: center;
     aspect-ratio: 2.5 / 3.5; /* Traditional physical gaming card dimensional scaling */
     cursor: pointer;
@@ -314,11 +315,15 @@ body {
 
 .quiz-card-header {
     display: flex;
+    height: 18%;
     flex-direction: column;
     gap: 6px;
 }
 .quiz-card-header .card-question {
     color: white;
+    width: 100%; 
+    height: 100%;    /* Must have a defined height so clientHeight works */
+    white-space: normal; /* Allows text to wrap to multiple lines if needed */
     font-weight: 600;
     font-size: 20px;
     line-height: 1.4;
@@ -354,11 +359,13 @@ body {
     font-family: var(--font-stack);
     font-weight: 600;
     /* font-size: 14px; */
-    width: 100%;               /* Must have a defined width so clientWidth works */
-    white-space: nowrap;       /* Forces text to a single line so scrollWidth can be measured */
+    width: 100%;  
+    height: 100%;              /* Must have a defined height so clientHeight works */
+    white-space: normal;       /* Forces text to a single line so scrollWidth can be measured */
     overflow: hidden;
     padding: 14px 18px;
     border-radius: 14px;
+    flex-wrap: wrap;
     cursor: pointer;
     text-align: left;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
