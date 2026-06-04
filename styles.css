@@ -274,6 +274,7 @@ body {
     display: none; /* Hides visual native track layers on Chrome/Safari engines */
 }
 
+/*sets carousel card dimensions. Take note that there is seperate rules in the mobile only section at the bottom of the css file*/
 .carousel-card-thumb {
     flex: 0 0 75%; /* Viewport visibility width baseline for adjacent cards hint */
     width: 75%;
@@ -281,16 +282,6 @@ body {
     scroll-snap-align: center;
     aspect-ratio: 2.5 / 3.5; /* Traditional physical gaming card dimensional scaling */
     cursor: pointer;
-}
-
-/*This adjusts the width and spect ratio for mobile screens*/
-@media (max-width: 480px) {
-    .carousel-card-thumb {
-        flex: 0 0 88%;      /* 👈 Step 1: Widen cards so they automatically get taller */
-        width: 88%;
-        aspect-ratio: auto;  /* 👈 Step 2: Break the rigid aspect ratio constraint */
-        min-height: 420px;   /* 👈 Step 3: Ensure they maintain a premium, tall gaming-card shape safely */
-    }
 }
 
 .card-thumb-mock {
@@ -457,6 +448,16 @@ body {
     font-size: 12px;
     color: var(--text-muted);
     margin-top: 16px;
+}
+
+/*This adjusts things for mobile screens*/
+@media (max-width: 480px) {
+    .carousel-card-thumb {
+        flex: 0 0 88%;      /* 👈 Step 1: Widen cards so they automatically get taller */
+        width: 88%;
+        aspect-ratio: auto;  /* 👈 Step 2: Break the rigid aspect ratio constraint */
+        min-height: 420px;   /* 👈 Step 3: Ensure they maintain a premium, tall gaming-card shape safely */
+    }
 }
 
 
