@@ -283,6 +283,16 @@ body {
     cursor: pointer;
 }
 
+/*This adjusts the width and spect ratio for mobile screens*/
+@media (max-width: 480px) {
+    .carousel-card-thumb {
+        flex: 0 0 88%;      /* 👈 Step 1: Widen cards so they automatically get taller */
+        width: 88%;
+        aspect-ratio: auto;  /* 👈 Step 2: Break the rigid aspect ratio constraint */
+        min-height: 420px;   /* 👈 Step 3: Ensure they maintain a premium, tall gaming-card shape safely */
+    }
+}
+
 .card-thumb-mock {
     width: 100%;
     height: 100%;
