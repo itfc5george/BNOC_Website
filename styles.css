@@ -394,7 +394,7 @@ body {
 .blue-gradient { background: linear-gradient(135deg, #00b4db, #0083b0); }
 .purple-gradient { background: linear-gradient(135deg, #7f00ff, #e100ff); }
 .green-gradient { background: linear-gradient(135deg, #11998e, #38ef7d); }
-.result-gradient { background: linear-gradient(135deg, #1e293b, #334155); }
+.result-gradient { background: linear-gradient(135deg, #e6b800, #996e00); }
 
 /* Final Result Action Button Elements */
 .result-display-area h2 {

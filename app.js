@@ -210,16 +210,18 @@ function initQuizCarousel() {
     const resultDisplay = document.getElementById("resultDisplay");
     
     // Core Answers key matrix
-    const correctAnswers = ["B", "C", "B", "A", "A"];
+    // const correctAnswers = ["B", "C", "B", "A", "A"];
     // Tracking user answers storage
-    let userAnswers = {};
+    let userAnswers = [];
 
     // 1. Automatic Moving Mechanism on option button selection
     optionButtons.forEach(button => {
         button.addEventListener("click", (e) => {
-            const card = e.target.closest(".quiz-card");
+            const card = e.target.closest(".quiz-card"); //This targets the specific question card the user is currently looking at.
             const questionIndex = parseInt(card.getAttribute("question-topic"));
             const chosenValue = e.target.getAttribute("data-value");
+            // const chosenValue = e.target.textContent;
+            
 
             // Clear previous selections on this card if any exist
             card.querySelectorAll(".quiz-option-btn").forEach(btn => btn.classList.remove("selected"));
@@ -227,7 +229,7 @@ function initQuizCarousel() {
             e.target.classList.add("selected");
 
             // Save choice configuration records
-            userAnswers[questionIndex] = chosenValue;
+            userAnswers.push(chosenValue);
 
             // Compute automatic calculation displacement paths
             const nextCard = card.nextElementSibling;
@@ -243,6 +245,7 @@ function initQuizCarousel() {
                     });
                 }, 250);
             }
+            console.log(userAnswers); // Debugging: Log current user answers state
         });
     });
 
