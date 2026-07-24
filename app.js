@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuizCarousel();
 });
 
+// Define global variables
+let questionsDisplayed = [];
+let userAnswers = [];
+let userAnswerPlayers = []; 
+let quizQuestionsData = null;
+
+
 /**
  * 1. ACCORDION LOGIC ENGINE (Primary and Nested Elements)
  * Dynamically computes scrollHeight values instead of setting arbitrary max-height strings.
@@ -203,16 +210,18 @@ async function populateSiteText() {
 /**
  * 6. QUIZ CAROUSEL INTERACTION AND RESPONSE
  */
-function initQuizCarousel() {
+async function initQuizCarousel() {
     const carousel = document.getElementById("quizCarousel");
     const optionButtons = document.querySelectorAll(".quiz-option-btn");
     const revealBtn = document.getElementById("revealBtn");
     const resultDisplay = document.getElementById("resultDisplay");
+
+    // const response = await fetch('quiz_questions.json');
+    // if (!response.ok) throw new Error("Could not fetch quiz_questions.json");
+    // quizQuestionsData = await response.json();
+
+    // console.log("Quiz questions data loaded:", data[0][0]); // Debugging: Log the loaded quiz questions data
     
-    // Core Answers key matrix
-    // const correctAnswers = ["B", "C", "B", "A", "A"];
-    // Tracking user answers storage
-    let userAnswers = [];
 
     // 1. Automatic Moving Mechanism on option button selection
     optionButtons.forEach(button => {
@@ -229,7 +238,18 @@ function initQuizCarousel() {
             e.target.classList.add("selected");
 
             // Save choice configuration records
-            userAnswers.push(chosenValue);
+            if (userAnswers.length <= 3) { // needs to be one less than the total number of questions
+                userAnswers.push(chosenValue);
+            }
+            
+            // When the right amount of questions answered, calculate the most like player
+            if (userAnswers.length === 4) {
+                console.log("All questions answered. Ready to reveal results.");
+                for (let i = 0; i < userAnswers.length; i++) {
+                    console.log("The user answered " + userAnswers[i]);
+                }
+
+            }    
 
             // Compute automatic calculation displacement paths
             const nextCard = card.nextElementSibling;
@@ -245,7 +265,8 @@ function initQuizCarousel() {
                     });
                 }, 250);
             }
-            console.log(userAnswers); // Debugging: Log current user answers state
+            console.log("answers array is " + userAnswers); // Debugging: Log current user answers state
+            console.log("the length of the answers array is " + userAnswers.length)
         });
     });
 
@@ -309,6 +330,9 @@ async function populateQuizQuestions() {
                 card.setAttribute('data-B_Answer', cardData.B_Answer.answer);
                 card.setAttribute('data-C_Answer', cardData.C_Answer.answer);
                 card.setAttribute('data-D_Answer', cardData.D_Answer.answer);
+
+                // Update the questionsDisplayed array to append the new question
+                questionsDisplayed.push(question);
                 
                 // Update the visible text inside the span element
                 // Update the main title first
@@ -367,6 +391,8 @@ async function populateQuizQuestions() {
                 console.warn(`Missing data in JSON for question: ${question}`);
             }
         });
+
+        console.log(questionsDisplayed); // Debugging: Show the array of questions that have been loaded
         
     } catch (error) {
         console.error("Error loading text content:", error);
@@ -376,8 +402,8 @@ async function populateQuizQuestions() {
 
 
 // Run the function as soon as the DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     populateSiteText();
-    // initQuizCarousel();
     populateQuizQuestions();
+    // initQuizCarousel();
 });

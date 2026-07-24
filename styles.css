@@ -332,6 +332,10 @@ body {
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
+.card-question.result-text{
+    text-align: center;
+}
+
 .badge {
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(4px);
@@ -396,52 +400,32 @@ body {
 .green-gradient { background: linear-gradient(135deg, #11998e, #38ef7d); }
 .result-gradient { background: linear-gradient(135deg, #e6b800, #996e00); }
 
-/* Final Result Action Button Elements */
-.result-display-area h2 {
-    color: #ffffff;
-    font-size: 22px;
-    font-weight: 800;
-    margin-top: 16px;
-}
-
-.result-score {
-    font-size: 48px;
-    font-weight: 800;
-    color: #6366f1;
-    background: #ffffff;
-    width: 90px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin: 20px auto 0 auto;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-}
-
-.reveal-btn {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    font-family: var(--font-stack);
-    font-weight: 800;
-    font-size: 16px;
-    padding: 16px;
-    border-radius: 14px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
-    transition: transform 0.1s ease, background-color 0.2s ease;
+/* .quiz-result-thumb { 
     width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-    margin-top: 24px;
+    height: 100%;
+
+} */
+
+/* Alternative of card-thumb-mock for quiz */
+.quiz-result-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, background 0.3s ease;
 }
 
-.reveal-btn:active {
-    transform: scale(0.97);
-    background-color: var(--accent-hover);
+.quiz-result-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
+
 
 .carousel-hint {
     text-align: center;
