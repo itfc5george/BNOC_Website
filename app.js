@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let questionsDisplayed = [];
 let userAnswers = [];
 let userAnswerPlayers = []; 
-let quizQuestionsData = null;
+// let quizQuestionsData = null;
 
 
 /**
@@ -215,91 +215,150 @@ async function initQuizCarousel() {
     const optionButtons = document.querySelectorAll(".quiz-option-btn");
     const revealBtn = document.getElementById("revealBtn");
     const resultDisplay = document.getElementById("resultDisplay");
+    const chosenAnswersCharacters = []; //This is the array that will store the character names associated with the user's answers.
+    const chosenAnswersCategories = []; //This is the array that will store the category of the chosen characters
 
     // const response = await fetch('quiz_questions.json');
     // if (!response.ok) throw new Error("Could not fetch quiz_questions.json");
     // quizQuestionsData = await response.json();
 
     // console.log("Quiz questions data loaded:", data[0][0]); // Debugging: Log the loaded quiz questions data
-    
-
-    // 1. Automatic Moving Mechanism on option button selection
-    optionButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
-            const card = e.target.closest(".quiz-card"); //This targets the specific question card the user is currently looking at.
-            const questionIndex = parseInt(card.getAttribute("question-topic"));
-            const chosenValue = e.target.getAttribute("data-value");
-            // const chosenValue = e.target.textContent;
-            
-
-            // Clear previous selections on this card if any exist
-            card.querySelectorAll(".quiz-option-btn").forEach(btn => btn.classList.remove("selected"));
-            // Highlight chosen item state
-            e.target.classList.add("selected");
-
-            // Save choice configuration records
-            if (userAnswers.length <= 3) { // needs to be one less than the total number of questions
-                userAnswers.push(chosenValue);
-            }
-            
-            // When the right amount of questions answered, calculate the most like player
-            if (userAnswers.length === 4) {
-                console.log("All questions answered. Ready to reveal results.");
-                for (let i = 0; i < userAnswers.length; i++) {
-                    console.log("The user answered " + userAnswers[i]);
-                }
-
-            }    
-
-            // Compute automatic calculation displacement paths
-            const nextCard = card.nextElementSibling;
-            if (nextCard) {
-                // Precise coordinate translation regardless of margins/paddings
-                const scrollTarget = nextCard.offsetLeft - carousel.offsetLeft;
-                
-                // Allow micro-delay for user touch-feedback visualization before moving
-                setTimeout(() => {
-                    carousel.scrollTo({
-                        left: scrollTarget,
-                        behavior: "smooth"
-                    });
-                }, 250);
-            }
-            console.log("answers array is " + userAnswers); // Debugging: Log current user answers state
-            console.log("the length of the answers array is " + userAnswers.length)
-        });
-    });
-
-    // 2. Compute Score and Reveal Custom Layout Result
-    revealBtn.addEventListener("click", () => {
-        let finalScore = 0;
-
-        // Compare answer profiles array keys
-        for (let i = 0; i < correctAnswers.length; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                finalScore++;
-            }
+    try {
+        // 1. Fetch the file
+        const response = await fetch('quiz_questions.json');
+        // 2. Check if the HTTP request was successful (status 200-299)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        // Beautifully display results in the final slide UI frame 
-        resultDisplay.innerHTML = `
-            <span class="badge">EVALUATION COMPLETE</span>
-            <h2>Your Final Score</h2>
-            <div class="result-score">${finalScore}/5</div>
-            <p style="color: #e2e8f0; font-size: 14px; text-align: center; margin-top: 16px;">
-                ${finalScore === 5 ? 'Outstanding! Masterfully played.' : 'Good effort! Swipe back to review your selections.'}
-            </p>
-        `;
-
-        // Hide or repurpose the action button after evaluation computation finishes
-        revealBtn.textContent = "Restart Quiz";
-        revealBtn.style.background = "#64748b"; // Neutral slate tone change
+        const responseCharacters = await fetch('characters.json');
+        if (!responseCharacters.ok) {
+            throw new Error(`HTTP error! Status: ${responseCharacters.status}`);
+        }
+        // 3. Parse and store the JSON data in a const
+        const quizQuestionsData = await response.json();
+        const charactersData = await responseCharacters.json();
         
-        // Setup simple refresh pattern if clicked again
+        // Use your data here
+        console.log(quizQuestionsData);
+        console.log(quizQuestionsData.food.A_Answer); // Example: Log the first question of the first topic
+
+        // 1. Automatic Moving Mechanism on option button selection
+        optionButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                const card = e.target.closest(".quiz-card"); //This targets the specific question card the user is currently looking at.
+                const questionIndex = parseInt(card.getAttribute("question-topic"));
+                const chosenValue = e.target.getAttribute("data-value");            
+                
+
+                // Clear previous selections on this card if any exist
+                card.querySelectorAll(".quiz-option-btn").forEach(btn => btn.classList.remove("selected"));
+                // Highlight chosen item state
+                e.target.classList.add("selected");
+
+                // Save choice configuration records
+                if (userAnswers.length <= 3) { // needs to be one less than the total number of questions
+                    userAnswers.push(chosenValue); //adds A,B,C,D to the userAnswers array
+                }
+                
+                // When the right amount of questions answered, calculate the most like player
+                if (userAnswers.length === 4) {
+                    console.log("All questions answered. Ready to reveal results.");
+                    for (let i = 0; i < userAnswers.length; i++) {    
+                        const answerId = userAnswers[i] + "_Answer"; // e.g., "A_Answer"              
+                        console.log("The user answered " + Object.entries(questionsDisplayed)[i][1]);
+                        const question_id = Object.entries(questionsDisplayed)[i][1]; //store the id (subject) of the question for that card placement
+                        console.log("The question info is " + quizQuestionsData[question_id][answerId].player);
+                        chosenAnswersCharacters.push(
+                            {
+                                name: quizQuestionsData[question_id][answerId].player,
+                                category: charactersData[quizQuestionsData[question_id][answerId].player].category
+                            }
+                        ); //store the character name and category associated with the user's answer
+                        console.log("Chosen Characters Array:", chosenAnswersCharacters);
+
+                        //NOW FIND THE MOST FREQUENT CATEGORY
+                        // Step 1: Count occurrences of each category
+                        // Creates: { Fruit: 3, Vegetable: 2 }
+                        const categoryCounts = chosenAnswersCharacters.reduce((tallyObject, currentItem) => {
+                            const categoryName = currentItem.category;
+                            
+                            // Look up current count (or default to 0), then add 1
+                            tallyObject[categoryName] = (tallyObject[categoryName] || 0) + 1;
+                            
+                            return tallyObject;
+                        }, {});
+
+                        // Step 2: Find the category with the highest count and get JUST the string name
+                        // Object.entries creates pairs like: [['Fruit', 3], ['Vegetable', 2]]
+                        const mostFrequentCategory = Object.entries(categoryCounts).reduce(
+                            (championPair, inspectPair) => {
+                                const currentCount = inspectPair[1];
+                                const highestCountSoFar = championPair[1];
+
+                                // If current count is higher, it becomes the new champion pair
+                                return currentCount > highestCountSoFar ? inspectPair : championPair;
+                            },
+                            ['', 0] // Initial starting pair: [categoryName, count]
+                        )[0]; // <-- Grab index 0 of the winning pair to get ONLY the category string!
+
+                        console.log(mostFrequentCategory);
+                    }    
+
+                }    
+
+
+                // Compute automatic calculation displacement paths
+                const nextCard = card.nextElementSibling;
+                if (nextCard) {
+                    // Precise coordinate translation regardless of margins/paddings
+                    const scrollTarget = nextCard.offsetLeft - carousel.offsetLeft;
+                    
+                    // Allow micro-delay for user touch-feedback visualization before moving
+                    setTimeout(() => {
+                        carousel.scrollTo({
+                            left: scrollTarget,
+                            behavior: "smooth"
+                        });
+                    }, 250);
+                }
+
+            });
+        });
+
+        // 2. Compute Score and Reveal Custom Layout Result
         revealBtn.addEventListener("click", () => {
-            window.location.reload();
-        }, { once: true });
-    });
+            let finalScore = 0;
+
+            // Compare answer profiles array keys
+            for (let i = 0; i < correctAnswers.length; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    finalScore++;
+                }
+            }
+
+            // Beautifully display results in the final slide UI frame 
+            resultDisplay.innerHTML = `
+                <span class="badge">EVALUATION COMPLETE</span>
+                <h2>Your Final Score</h2>
+                <div class="result-score">${finalScore}/5</div>
+                <p style="color: #e2e8f0; font-size: 14px; text-align: center; margin-top: 16px;">
+                    ${finalScore === 5 ? 'Outstanding! Masterfully played.' : 'Good effort! Swipe back to review your selections.'}
+                </p>
+            `;
+
+            // Hide or repurpose the action button after evaluation computation finishes
+            revealBtn.textContent = "Restart Quiz";
+            revealBtn.style.background = "#64748b"; // Neutral slate tone change
+            
+            // Setup simple refresh pattern if clicked again
+            revealBtn.addEventListener("click", () => {
+                window.location.reload();
+            }, { once: true });
+        });
+    } catch (error) {
+        console.error("Failed to load JSON file:", error);
+    }
 }
 ;
 
