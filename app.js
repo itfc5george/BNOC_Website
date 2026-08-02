@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 let questionsDisplayed = [];
 let userAnswers = [];
 let userAnswerPlayers = []; 
+let finalCharacter = null;
+let charactersData = null;
 // let quizQuestionsData = null;
 
 
@@ -122,6 +124,8 @@ function initActionCardModal() {
     // Target fields matching structural templates inside modal layers
     const cardFront = document.getElementById('modalCardFront');
     const frontTitle = document.getElementById('modalFrontTitle');
+    const backBadge = document.querySelector('.card-back-badge');
+    const quizResultCharacterImage = document.getElementById('quizResultCharacterImage');
     const backTitle = document.getElementById('modalBackTitle');
     const backDescription = document.getElementById('modalBackDescription');
 
@@ -130,14 +134,24 @@ function initActionCardModal() {
             const title = card.getAttribute('data-title');
             const description = card.getAttribute('data-desc');
             const internalGraphic = card.querySelector('.card-thumb-mock');
+
+            console.log("Card clicked:", title, description, internalGraphic.className);
             
             // Replicate background style patterns dynamically onto our overlay element
             cardFront.className = 'modal-face card-front ' + internalGraphic.className.split(' ')[1];
             
-            // Populating content fields
-            frontTitle.textContent = title;
-            backTitle.textContent = title;
-            backDescription.textContent = description;
+            if (internalGraphic.className === "card-thumb-mock quiz-result-card") {
+                backBadge.style.display = "none"
+                backTitle.textContent = "The character you are most like is";
+                quizResultCharacterImage.src = `images_characters/test_character.png`; 
+                quizResultCharacterImage.style.display = "block";
+                backDescription.textContent = charactersData[finalCharacter].description;
+            } else {
+                // Populating content fields
+                frontTitle.textContent = title;
+                backTitle.textContent = title;
+                backDescription.textContent = description;
+            }
             
             // Launch transition sequence
             modal.classList.add('open');
@@ -237,7 +251,7 @@ async function initQuizCarousel() {
         }
         // 3. Parse and store the JSON data in a const
         const quizQuestionsData = await response.json();
-        const charactersData = await responseCharacters.json();
+        charactersData = await responseCharacters.json();
         
         // Use your data here
         console.log(quizQuestionsData);
@@ -303,6 +317,16 @@ async function initQuizCarousel() {
                         )[0]; // <-- Grab index 0 of the winning pair to get ONLY the category string!
 
                         console.log(mostFrequentCategory);
+                        
+                        //create a new array only with the most frequent category
+                        const filteredChosenAnswersCharacters = chosenAnswersCharacters.filter(item => item.category === mostFrequentCategory);
+                        console.log(filteredChosenAnswersCharacters);
+
+                        //Pick random character from the filtered array 
+                        const randomIndex = Math.floor(Math.random() * filteredChosenAnswersCharacters.length);
+                        finalCharacter = filteredChosenAnswersCharacters[randomIndex].name;
+                        console.log("Final Character: " + finalCharacter);
+
                     }    
 
                 }    
@@ -326,36 +350,6 @@ async function initQuizCarousel() {
             });
         });
 
-        // 2. Compute Score and Reveal Custom Layout Result
-        revealBtn.addEventListener("click", () => {
-            let finalScore = 0;
-
-            // Compare answer profiles array keys
-            for (let i = 0; i < correctAnswers.length; i++) {
-                if (userAnswers[i] === correctAnswers[i]) {
-                    finalScore++;
-                }
-            }
-
-            // Beautifully display results in the final slide UI frame 
-            resultDisplay.innerHTML = `
-                <span class="badge">EVALUATION COMPLETE</span>
-                <h2>Your Final Score</h2>
-                <div class="result-score">${finalScore}/5</div>
-                <p style="color: #e2e8f0; font-size: 14px; text-align: center; margin-top: 16px;">
-                    ${finalScore === 5 ? 'Outstanding! Masterfully played.' : 'Good effort! Swipe back to review your selections.'}
-                </p>
-            `;
-
-            // Hide or repurpose the action button after evaluation computation finishes
-            revealBtn.textContent = "Restart Quiz";
-            revealBtn.style.background = "#64748b"; // Neutral slate tone change
-            
-            // Setup simple refresh pattern if clicked again
-            revealBtn.addEventListener("click", () => {
-                window.location.reload();
-            }, { once: true });
-        });
     } catch (error) {
         console.error("Failed to load JSON file:", error);
     }
@@ -434,17 +428,6 @@ async function populateQuizQuestions() {
 
                     }
                 });
-
-                // // Loop through each option letter to update the questions
-                // ['A', 'B', 'C', 'D'].forEach(letter => {
-                //     // Dynamically targets '.q-a', '.q-b', etc.
-                //     const questionSpan = card.querySelector(`.q-${letter}`); 
-                    
-                //     if (questionSpan) {
-                //         // Dynamically grabs cardData.a_question, cardData.b_question, etc.
-                //         questionSpan.textContent = cardData[`${letter}_question`]; 
-                //     }
-                // });
 
             } else {
                 console.warn(`Missing data in JSON for question: ${question}`);
